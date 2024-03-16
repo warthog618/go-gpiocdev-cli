@@ -20,8 +20,8 @@ func init() {
 var versionCmd = &cobra.Command{
 	Use:   "version",
 	Short: "Display the version",
-	Long:  `All software has versions. This is gpiod's`,
+	Long:  `All software has versions. This is gpiocdev's`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Printf("%s (gpiod) %s\n", os.Args[0], version)
+		fmt.Printf("%s (gpiocdev) %s\n", os.Args[0], version)
 	},
 }

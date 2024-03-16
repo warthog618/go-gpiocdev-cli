@@ -22,7 +22,7 @@ tools into a single tool.
 On Linux:
 
 ```shell
-go install -o gpiocdev get github.com/warthog618/go-gpiocdev-cli
+go install github.com/warthog618/go-gpiocdev-cli
 ```
 
 ## Usage
