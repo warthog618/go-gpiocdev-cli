@@ -17,6 +17,15 @@ on Linux using the GPIO character device (**/dev/gpiochipN**).
 This utility combines the Go equivalent of all the **libgpiod** command line
 tools into a single tool.
 
+> [!NOTE]
+> This is a WIP.
+>
+> The existing version is split off from my **gpiod** library (now renamed **[gpiocdev](https://github.com/warthog618/go-gpiocdev)**) and mirrors the **libgpiod v1** tools, as at the time there was no **libgpiod v2** and so no tools using the latest kernel uAPI.
+>
+> The plan is to update these tools to mirror the **libgpiod v2** tools, but that isn't urgent given those tools now exist.
+>
+> The purpose of the split was to reduce the dependencies in **gpiocdev**, and to decouple updates to the cli from the core library.
+
 ## Installation
 
 On Linux:
