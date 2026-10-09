@@ -23,7 +23,6 @@ func init() {
 	monCmd.Flags().StringVarP(&monOpts.Edge, "edge", "e", "both", "select the edge detection")
 	monCmd.Flags().UintVarP(&monOpts.NumEvents, "num-events", "n", 0, "exit after n edges")
 	monCmd.Flags().BoolVarP(&monOpts.Quiet, "quiet", "q", false, "don't display event details")
-	monCmd.Flags().IntVar(&monOpts.AbiV, "abiv", 0, "use specified ABI version.")
 	monCmd.Flags().MarkHidden("abiv")
 	monCmd.SetHelpTemplate(monCmd.HelpTemplate() + extendedMonHelp)
 	rootCmd.AddCommand(monCmd)
@@ -59,7 +58,6 @@ var (
 		Quiet          bool
 		NumEvents      uint
 		DebouncePeriod time.Duration
-		AbiV           int
 	}{}
 )
 
@@ -70,9 +68,6 @@ func mon(cmd *cobra.Command, args []string) error {
 		return err
 	}
 	copts := []gpiocdev.ChipOption{gpiocdev.WithConsumer("gpiocdevctl-mon")}
-	if monOpts.AbiV != 0 {
-		copts = append(copts, gpiocdev.WithABIVersion(monOpts.AbiV))
-	}
 	c, err := gpiocdev.NewChip(name, copts...)
 	if err != nil {
 		return err

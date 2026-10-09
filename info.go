@@ -14,7 +14,6 @@ import (
 )
 
 func init() {
-	infoCmd.Flags().IntVar(&infoOpts.AbiV, "abiv", 0, "use specified ABI version.")
 	infoCmd.Flags().MarkHidden("abiv")
 	rootCmd.AddCommand(infoCmd)
 }
@@ -28,7 +27,6 @@ var (
 		DisableFlagsInUseLine: true,
 	}
 	infoOpts = struct {
-		AbiV int
 	}{}
 )
 
@@ -40,9 +38,6 @@ func info(cmd *cobra.Command, args []string) {
 		cc = gpiocdev.Chips()
 	}
 	copts := []gpiocdev.ChipOption{}
-	if infoOpts.AbiV != 0 {
-		copts = append(copts, gpiocdev.WithABIVersion(infoOpts.AbiV))
-	}
 	for _, path := range cc {
 		c, err := gpiocdev.NewChip(path, copts...)
 		if err != nil {

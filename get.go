@@ -17,7 +17,6 @@ func init() {
 	getCmd.Flags().BoolVarP(&getOpts.ActiveLow, "active-low", "l", false, "treat the line state as active low")
 	getCmd.Flags().BoolVarP(&getOpts.AsIs, "as-is", "a", false, "request the line as-is rather than as an input")
 	getCmd.Flags().StringVarP(&getOpts.Bias, "bias", "b", "as-is", "set the line bias.")
-	getCmd.Flags().IntVar(&getOpts.AbiV, "abiv", 0, "use specified ABI version.")
 	getCmd.Flags().MarkHidden("abiv")
 	getCmd.SetHelpTemplate(getCmd.HelpTemplate() + extendedGetHelp)
 	rootCmd.AddCommand(getCmd)
@@ -44,7 +43,6 @@ var (
 		ActiveLow bool
 		AsIs      bool
 		Bias      string
-		AbiV      int
 	}{}
 )
 
@@ -97,9 +95,6 @@ func makeGetOpts() []gpiocdev.LineReqOption {
 	case "as-is":
 		fallthrough
 	default:
-	}
-	if getOpts.AbiV != 0 {
-		opts = append(opts, gpiocdev.WithABIVersion(getOpts.AbiV))
 	}
 	return opts
 }

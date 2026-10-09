@@ -12,7 +12,6 @@ import (
 )
 
 func init() {
-	findCmd.Flags().IntVar(&findOpts.AbiV, "abiv", 0, "use specified ABI version.")
 	findCmd.Flags().MarkHidden("abiv")
 	rootCmd.AddCommand(findCmd)
 }
@@ -27,15 +26,11 @@ var (
 		DisableFlagsInUseLine: true,
 	}
 	findOpts = struct {
-		AbiV int
 	}{}
 )
 
 func find(cmd *cobra.Command, args []string) {
 	copts := []gpiocdev.ChipOption{}
-	if findOpts.AbiV != 0 {
-		copts = append(copts, gpiocdev.WithABIVersion(findOpts.AbiV))
-	}
 	for _, linename := range args {
 		for _, cname := range gpiocdev.Chips() {
 			c, err := gpiocdev.NewChip(cname, copts...)
